@@ -1,0 +1,38 @@
+{% extends 'flatpages/default.html' %}
+
+{% block title %}
+PostIn
+{% endblock title %}
+
+{% block content %}
+
+<h1>{{ post_show.theme_news }}</h1>
+
+<hr>
+
+        <table style="margin: 0 auto">
+            <tr>
+                <td>Автор</td>
+                <td>Дата добавления</td>
+                <td>Категория</td>
+                <td>Рейтинг</td>
+            </tr>
+            <tr>
+                <td>{{ post_show.authors }}</td>
+                <td>{{ post_show.date_joined|date:'dS m y' }}</td>
+                <td>{% for category in post_show.categorys.all %}
+                    <a href="{% url 'category_list' category.id %}">{{ category }}</a>
+                    {% endfor %}
+                </td>
+                <td>{{ post_show.rate_news }}</td>
+            </tr>
+        </table>
+
+<hr>
+
+<h3>{{ post_show.body_news }}</h3>
+
+{% endblock content %}
+
+
+
