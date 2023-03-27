@@ -1,0 +1,63 @@
+from django.db import models
+
+
+class Tourist(models.Model):
+    first_name = models.CharField(max_length=200)
+    middle_name = models.CharField(max_length=200)
+    last_name = models.CharField(max_length=200)
+    email = models.CharField(max_length=200, unique=True)
+    phone = models.BigIntegerField(max_length=100, unique=True)
+
+
+class MountainCoord(models.Model):
+    latitude = models.FloatField(max_length=200)
+    longitude = models.FloatField(max_length=200)
+    height = models.FloatField(max_length=200)
+
+
+class Level(models.Model):
+    winter = models.CharField(max_length=10, verbose_name='Зима', blank=True, null=True)
+    summer = models.CharField(max_length=10, verbose_name='Лето', blank=True, null=True)
+    autumn = models.CharField(max_length=10, verbose_name='Осень', blank=True, null=True)
+    spring = models.CharField(max_length=10, verbose_name='Весна', blank=True, null=True)
+
+
+class Images(models.Model):
+    from_mountain = models.ForeignKey('PerevalAdded', on_delete=models.CASCADE,)
+    data = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True, null=True)
+    title = models.CharField(max_length=255)
+    date_added = models.DateField(auto_now_add=True)
+
+
+class SprActivitiesTypes(models.Model):
+    title = models.CharField(max_length=50, unique=True)
+
+
+class PerevalAdded(models.Model):
+    NEW = 'new'
+    PENDING = 'pending'
+    ACCEPTED = 'accepted'
+    REJECTED = 'rejected'
+    CHOICES = [
+        ("new", "новый"),
+        ("pending", "модератор взял в работу"),
+        ("accepted", "модерация прошла успешно"),
+        ("rejected", "модерация прошла, информация не принята"),
+    ]
+
+    beauty_title = models.CharField(max_length=255, blank=True, null=True)
+    title = models.CharField(max_length=255)
+    other_titles = models.CharField(max_length=255, blank=True, null=True)
+    add_time = models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey(Tourist, on_delete=models.CASCADE, related_name='tourist_mount')
+    coords = models.ForeignKey(MountainCoord, on_delete=models.CASCADE)
+    level_status = models.ForeignKey(Level, on_delete=models.CASCADE)
+    status = models.CharField(max_length=10, choices=CHOICES, default=NEW)
+    Activities = models.ManyToManyField(SprActivitiesTypes, through='PerevalAddedSprActivitiesTypes')
+    connect = models.TextField(null=True)
+
+
+class PerevalAddedSprActivitiesTypes(models.Model):
+    PerevalAdded = models.ForeignKey(PerevalAdded, on_delete=models.CASCADE)
+    SprActivitiesTypes = models.ForeignKey(SprActivitiesTypes, on_delete=models.CASCADE)
+
