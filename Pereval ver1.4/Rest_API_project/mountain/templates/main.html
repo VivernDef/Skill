@@ -1,0 +1,47 @@
+{% extends 'flatpages/default.html' %}
+{% block content %}
+
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home Troll</title>
+</head>
+
+
+<body>
+<h1>Наши посты</h1>
+<h3> {{ time_now|date:'d m y  H:i' }}</h3>
+<table>
+    <tr>
+        <td>Автор</td>
+        <td>Категория</td>
+        <td>Заголовок</td>
+        <td>Тема новости</td>
+        <td>Рейтинг</td>
+        <td>Дата создания</td>
+    </tr>
+    {% for announ in announcement %}
+    <tr>
+        <td>{{announ.authors.user_game}}</td>
+        <td>{% for category in announ.AnnouncementCategory.all %}
+            <a href="{% url 'cat_list_all' category.id %}">{{ category }}</a>
+            {% endfor %}
+        </td>
+        <td>{{announ.title_announce}}</td>
+        <td>{{announ.body_announce}}</td>
+        <td>{{announ.rate_announce}}</td>
+        <td>{{announ.date_joined}}</td>
+        <td><p class="link-read-post"><form><button><a href="{% url 'announce_detail' announ.pk %}"> Читатьт пост</a></button></form></p></td>
+
+    </tr>
+    {% endfor %}
+</table>
+
+
+
+
+</body>
+
+</html>
+{% endblock content %}
