@@ -1,0 +1,587 @@
+openapi: 3.0.3
+info:
+  title: Pereval DRF
+  version: v1.0.1
+  description: All Pereval in the world
+paths:
+  /get/submitData/:
+    get:
+      operationId: get_submitData_list
+      description: Фильтрация по email
+      tags:
+      - get
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Pereval'
+          description: ''
+  /get/submitData/{id}/:
+    get:
+      operationId: get_submitData_retrieve
+      description: Отображение одной страницы
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - get
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pereval'
+          description: ''
+  /patch/submitData/{id}/:
+    get:
+      operationId: patch_submitData_retrieve
+      description: Обновление страницы с ограничением
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - patch
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PerevalSerializerUPdate'
+          description: ''
+    put:
+      operationId: patch_submitData_update
+      description: Обновление страницы с ограничением
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - patch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PerevalSerializerUPdate'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PerevalSerializerUPdate'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PerevalSerializerUPdate'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PerevalSerializerUPdate'
+          description: ''
+    patch:
+      operationId: patch_submitData_partial_update
+      description: Обновление страницы с ограничением
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - patch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedPerevalSerializerUPdate'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedPerevalSerializerUPdate'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedPerevalSerializerUPdate'
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PerevalSerializerUPdate'
+          description: ''
+  /submitData/:
+    get:
+      operationId: submitData_list
+      description: Отобаржение всех статей
+      tags:
+      - submitData
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Pereval'
+          description: ''
+    post:
+      operationId: submitData_create
+      description: Отобаржение всех статей
+      tags:
+      - submitData
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Pereval'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Pereval'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Pereval'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pereval'
+          description: ''
+  /submitData/schema/:
+    get:
+      operationId: submitData_schema_retrieve
+      description: |-
+        OpenApi3 schema for this API. Format can be selected via content negotiation.
+
+        - YAML: application/vnd.oai.openapi
+        - JSON: application/vnd.oai.openapi+json
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - yaml
+      - in: query
+        name: lang
+        schema:
+          type: string
+          enum:
+          - af
+          - ar
+          - ar-dz
+          - ast
+          - az
+          - be
+          - bg
+          - bn
+          - br
+          - bs
+          - ca
+          - cs
+          - cy
+          - da
+          - de
+          - dsb
+          - el
+          - en
+          - en-au
+          - en-gb
+          - eo
+          - es
+          - es-ar
+          - es-co
+          - es-mx
+          - es-ni
+          - es-ve
+          - et
+          - eu
+          - fa
+          - fi
+          - fr
+          - fy
+          - ga
+          - gd
+          - gl
+          - he
+          - hi
+          - hr
+          - hsb
+          - hu
+          - hy
+          - ia
+          - id
+          - ig
+          - io
+          - is
+          - it
+          - ja
+          - ka
+          - kab
+          - kk
+          - km
+          - kn
+          - ko
+          - ky
+          - lb
+          - lt
+          - lv
+          - mk
+          - ml
+          - mn
+          - mr
+          - ms
+          - my
+          - nb
+          - ne
+          - nl
+          - nn
+          - os
+          - pa
+          - pl
+          - pt
+          - pt-br
+          - ro
+          - ru
+          - sk
+          - sl
+          - sq
+          - sr
+          - sr-latn
+          - sv
+          - sw
+          - ta
+          - te
+          - tg
+          - th
+          - tk
+          - tr
+          - tt
+          - udm
+          - uk
+          - ur
+          - uz
+          - vi
+          - zh-hans
+          - zh-hant
+      tags:
+      - submitData
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/vnd.oai.openapi:
+              schema:
+                type: object
+                additionalProperties: {}
+            application/yaml:
+              schema:
+                type: object
+                additionalProperties: {}
+            application/vnd.oai.openapi+json:
+              schema:
+                type: object
+                additionalProperties: {}
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+components:
+  schemas:
+    Images:
+      type: object
+      description: Сериализатор работы с фото
+      properties:
+        data:
+          type: string
+          format: uri
+          nullable: true
+        title:
+          type: string
+          maxLength: 255
+      required:
+      - title
+    MountainCoord:
+      type: object
+      description: Сериализатор для полей координат
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        latitude:
+          type: number
+          format: double
+        longitude:
+          type: number
+          format: double
+        height:
+          type: number
+          format: double
+      required:
+      - height
+      - id
+      - latitude
+      - longitude
+    PatchedPerevalSerializerUPdate:
+      type: object
+      description: Вспомогатльный сериализатор для органиченных полей
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        beauty_title:
+          type: string
+          nullable: true
+          maxLength: 255
+        title:
+          type: string
+          maxLength: 255
+        other_titles:
+          type: string
+          nullable: true
+          maxLength: 255
+        add_time:
+          type: string
+          format: date-time
+          readOnly: true
+        status:
+          $ref: '#/components/schemas/StatusEnum'
+        connect:
+          type: string
+          nullable: true
+        winter:
+          type: string
+          nullable: true
+          title: Зима
+          maxLength: 50
+        summer:
+          type: string
+          nullable: true
+          title: Лето
+          maxLength: 50
+        autumn:
+          type: string
+          nullable: true
+          title: Осень
+          maxLength: 50
+        spring:
+          type: string
+          nullable: true
+          title: Весна
+          maxLength: 50
+        coords:
+          $ref: '#/components/schemas/MountainCoord'
+        images:
+          $ref: '#/components/schemas/Images'
+    Pereval:
+      type: object
+      description: Главный сериализатор для всей информации
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        beauty_title:
+          type: string
+          nullable: true
+          maxLength: 255
+        title:
+          type: string
+          maxLength: 255
+        other_titles:
+          type: string
+          nullable: true
+          maxLength: 255
+        add_time:
+          type: string
+          format: date-time
+          readOnly: true
+        status:
+          $ref: '#/components/schemas/StatusEnum'
+        connect:
+          type: string
+          nullable: true
+        winter:
+          type: string
+          nullable: true
+          title: Зима
+          maxLength: 50
+        summer:
+          type: string
+          nullable: true
+          title: Лето
+          maxLength: 50
+        autumn:
+          type: string
+          nullable: true
+          title: Осень
+          maxLength: 50
+        spring:
+          type: string
+          nullable: true
+          title: Весна
+          maxLength: 50
+        coords:
+          $ref: '#/components/schemas/MountainCoord'
+        user:
+          $ref: '#/components/schemas/Tourist'
+        images:
+          $ref: '#/components/schemas/Images'
+      required:
+      - add_time
+      - coords
+      - id
+      - images
+      - title
+      - user
+    PerevalSerializerUPdate:
+      type: object
+      description: Вспомогатльный сериализатор для органиченных полей
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        beauty_title:
+          type: string
+          nullable: true
+          maxLength: 255
+        title:
+          type: string
+          maxLength: 255
+        other_titles:
+          type: string
+          nullable: true
+          maxLength: 255
+        add_time:
+          type: string
+          format: date-time
+          readOnly: true
+        status:
+          $ref: '#/components/schemas/StatusEnum'
+        connect:
+          type: string
+          nullable: true
+        winter:
+          type: string
+          nullable: true
+          title: Зима
+          maxLength: 50
+        summer:
+          type: string
+          nullable: true
+          title: Лето
+          maxLength: 50
+        autumn:
+          type: string
+          nullable: true
+          title: Осень
+          maxLength: 50
+        spring:
+          type: string
+          nullable: true
+          title: Весна
+          maxLength: 50
+        coords:
+          $ref: '#/components/schemas/MountainCoord'
+        images:
+          $ref: '#/components/schemas/Images'
+      required:
+      - add_time
+      - coords
+      - id
+      - images
+      - title
+    StatusEnum:
+      enum:
+      - new
+      - pending
+      - accepted
+      - rejected
+      type: string
+      description: |-
+        * `new` - новый
+        * `pending` - модератор взял в работу
+        * `accepted` - модерация прошла успешно
+        * `rejected` - модерация прошла, информация не принята
+    Tourist:
+      type: object
+      description: Сериализатор полей данных о пользователе
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        username:
+          type: string
+          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_
+            only.
+          pattern: ^[\w.@+-]+$
+          maxLength: 150
+        first_name:
+          type: string
+          maxLength: 150
+        last_name:
+          type: string
+          maxLength: 150
+        email:
+          type: string
+          format: email
+          title: Email address
+          maxLength: 254
+        middle_name:
+          type: string
+          maxLength: 200
+        phone:
+          type: integer
+      required:
+      - id
+      - middle_name
+      - phone
+      - username
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: sessionid
